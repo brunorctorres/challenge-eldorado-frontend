@@ -20,4 +20,12 @@ export class CategoryComponent implements OnInit {
       this.categories = data.categories;
     });
   }
+
+  deleteCategory(category: Category) {
+    if (confirm('ATENÇÃO: Confirmar exclusão?')) {
+      this.categoryService.delete(category).subscribe((data) => {
+        if (data.removed) window.location.reload();
+      });
+    }
+  }
 }

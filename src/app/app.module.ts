@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CategoryComponent } from './category/category.component';
@@ -10,6 +9,7 @@ import { CategoryCreateComponent } from './category/category-create/category-cre
 import { DeviceComponent } from './device/device.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DeviceCreateComponent } from './device/device-create/device-create.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -19,8 +19,15 @@ import { DeviceCreateComponent } from './device/device-create/device-create.comp
     DeviceComponent,
     PageNotFoundComponent,
     DeviceCreateComponent,
+    MessagesComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
