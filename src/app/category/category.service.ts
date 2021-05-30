@@ -34,13 +34,7 @@ export class CategoryService {
       .pipe(catchError(this.errorHandler));
   }
 
-  getById(category: Category): Observable<Category> {
-    return this.httpClient
-      .get<Category>(this.api + '/categories/' + category.Id)
-      .pipe(catchError(this.errorHandler));
-  }
-
-  delete(category: Category) {
+  delete(category: Category): Observable<{ removed: boolean }> {
     return this.httpClient
       .delete<{ removed: boolean }>(
         `${this.api}/categories/${category.Id}`,

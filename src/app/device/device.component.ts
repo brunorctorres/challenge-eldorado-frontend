@@ -15,9 +15,16 @@ export class DeviceComponent implements OnInit {
   constructor(public deviceService: DeviceService) {}
 
   ngOnInit(): void {
-    this.deviceService.getAll().subscribe((data) => {
-      console.log(data);
-      this.devices = data.devices;
-    });
+    this.deviceService
+      .getAll()
+      .subscribe((data) => (this.devices = data.devices));
+  }
+
+  deleteDevice(device: Device) {
+    if (confirm('ATENÇÃO: Confirmar exclusão do dispositivo?')) {
+      this.deviceService.delete(device).subscribe((data) => {
+        if (data.removed) window.location.reload();
+      });
+    }
   }
 }

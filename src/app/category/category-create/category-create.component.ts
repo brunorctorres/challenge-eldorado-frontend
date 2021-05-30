@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from '../category.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CategoryService } from '../category.service';
 import { Router } from '@angular/router';
-import { Category } from 'src/app/models/Category';
 
 @Component({
   selector: 'app-category-create',
@@ -14,8 +13,8 @@ export class CategoryCreateComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private router: Router
   ) {
     this.categoryForm = formBuilder.group({
       Name: formBuilder.control('', Validators.required),
@@ -26,7 +25,6 @@ export class CategoryCreateComponent implements OnInit {
 
   submit() {
     if (this.categoryForm.dirty && this.categoryForm.valid) {
-      console.log(this.categoryForm.value);
       const category = this.categoryForm.value;
       this.categoryService.create(category).subscribe((data) => {
         if (data.created) this.router.navigate(['/categories']);

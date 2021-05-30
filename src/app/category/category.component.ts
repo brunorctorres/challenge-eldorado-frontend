@@ -15,17 +15,21 @@ export class CategoryComponent implements OnInit {
   constructor(public categoryService: CategoryService) {}
 
   ngOnInit(): void {
-    this.categoryService.getAll().subscribe((data) => {
-      console.log(data);
-      this.categories = data.categories;
-    });
+    this.categoryService
+      .getAll()
+      .subscribe((data) => (this.categories = data.categories));
   }
 
   deleteCategory(category: Category) {
-    if (confirm('ATENÇÃO: Confirmar exclusão?')) {
-      this.categoryService.delete(category).subscribe((data) => {
-        if (data.removed) window.location.reload();
-      });
+    if (confirm('ATENÇÃO: Confirmar exclusão da categoria?')) {
+      this.categoryService.delete(category).subscribe(
+        (data) => {
+          if (data.removed) window.location.reload();
+        },
+        (err) => {
+          alert('Falha na tentativa de exclusão.');
+        }
+      );
     }
   }
 }

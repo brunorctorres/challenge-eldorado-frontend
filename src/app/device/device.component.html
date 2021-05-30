@@ -4,10 +4,8 @@
   <li *ngFor="let device of devices">
     <span class="badge">{{ device.Id }}</span>
     <span class="title">{{ device.Color }}</span>
-    <span class="remove" onclick="console.log('remover dispositivo...')"
-      >X</span
-    >
+    <span class="remove" (click)="deleteDevice(device)">X</span>
   </li>
 </ul>
 
-<a href="/devices/create">Adicionar Dispositivo</a>
+<button type="button" routerLink="/devices/create">Novo Dispositivo</button>
