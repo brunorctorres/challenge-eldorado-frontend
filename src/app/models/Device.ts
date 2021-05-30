@@ -1,6 +1,6 @@
-import Category from './Category';
+import { Category } from './Category';
 
-export default interface Device {
+export interface Device {
   Id: number;
   Category: Category;
   Color: string;

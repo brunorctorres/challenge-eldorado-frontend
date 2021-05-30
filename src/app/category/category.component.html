@@ -1,0 +1,11 @@
+<h2>{{ title }}</h2>
+
+<ul class="categories">
+  <li *ngFor="let category of categories">
+    <span class="badge">{{ category.Id }}</span>
+    <span class="title">{{ category.Name }}</span>
+    <span class="remove" onclick="console.log('remover categoria...')">X</span>
+  </li>
+</ul>
+
+<a href="/categories/create">Adicionar Categoria</a>
