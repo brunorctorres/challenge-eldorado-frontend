@@ -1,17 +1,20 @@
-<h2>Adicionar Dispositivo</h2>
+<h2>Add Device</h2>
 
 <form method="POST" [formGroup]="deviceForm" (ngSubmit)="submit()">
   <div class="form-group">
     <label for="category">Category</label>
-    <select formControlName="Category" id="category">
-      <option value="" selected disabled hidden>Choose here</option>
+    <select formControlName="Category" id="category" appFocus>
+      <option value="" selected disabled hidden>Select a category</option>
       <option *ngFor="let category of categories" value="{{ category.Id }}">
         {{ category.Name }}
       </option>
     </select>
-    <!-- <control-messages
-      [control]="categoryCreationForm.get('Category')"
-    ></control-messages> -->
+    <div
+      *ngIf="Category?.invalid && (Category?.dirty || Category?.touched)"
+      class="alert alert-danger"
+    >
+      <div *ngIf="Category?.errors?.required">Category is required.</div>
+    </div>
   </div>
   <div class="form-group">
     <label for="color">Color</label>
@@ -20,24 +23,34 @@
       type="text"
       formControlName="Color"
       class="form-control"
-      maxlength="128"
     />
-    <!-- <control-messages
-      [control]="categoryCreationForm.get('Color')"
-    ></control-messages> -->
+    <div
+      *ngIf="Color?.invalid && (Color?.dirty || Color?.touched)"
+      class="alert alert-danger"
+    >
+      <div *ngIf="Color?.errors?.required">Color is required.</div>
+      <div *ngIf="Color?.errors?.pattern">Color accepts only letters.</div>
+      <div *ngIf="Color?.errors?.maxLength">16 characters maximum.</div>
+    </div>
   </div>
   <div class="form-group">
     <label for="part_number">Part Number</label>
     <input
       id="part_number"
-      type="text"
+      type="number"
+      min="0"
       formControlName="partNumber"
       class="form-control"
-      maxlength="128"
     />
-    <!-- <control-messages
-      [control]="categoryCreationForm.get('partNumber')"
-    ></control-messages> -->
+    <div
+      *ngIf="partNumber?.invalid && (partNumber?.dirty || partNumber?.touched)"
+      class="alert alert-danger"
+    >
+      <div *ngIf="partNumber?.errors?.required">Part Number is required.</div>
+      <div *ngIf="partNumber?.errors?.min || partNumber?.errors?.pattern">
+        Part Number accepts only numbers above 0.
+      </div>
+    </div>
   </div>
-  <button type="submit">Salvar</button>
+  <button type="submit" [disabled]="deviceForm.invalid">Salvar</button>
 </form>

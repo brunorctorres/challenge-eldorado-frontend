@@ -1,11 +1,28 @@
 <h2>{{ title }}</h2>
 
-<ul class="devices">
+<ul *ngIf="devices.length > 0; else empty_list" class="card">
   <li *ngFor="let device of devices">
     <span class="badge">{{ device.Id }}</span>
-    <span class="title">{{ device.Color }}</span>
+    <div class="fields">
+      <div class="field">
+        <span class="title">Color: </span>
+        <span class="value">{{ device.Color }}</span>
+      </div>
+      <div class="field">
+        <span class="title">Category: </span>
+        <span class="value">{{ device.Category.Name }}</span>
+      </div>
+      <div class="field">
+        <span class="title">Part Number: </span>
+        <span class="value">{{ device.partNumber }}</span>
+      </div>
+    </div>
     <span class="remove" (click)="deleteDevice(device)">X</span>
   </li>
 </ul>
 
-<button type="button" routerLink="/devices/create">Novo Dispositivo</button>
+<ng-template #empty_list>
+  <h3>{{ message }}</h3>
+</ng-template>
+
+<button type="button" routerLink="/devices/create">New Device</button>

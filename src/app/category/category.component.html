@@ -1,6 +1,6 @@
 <h2>{{ title }}</h2>
 
-<ul class="categories">
+<ul *ngIf="categories.length > 0; else empty_list" class="card">
   <li *ngFor="let category of categories">
     <span class="badge">{{ category.Id }}</span>
     <span class="title">{{ category.Name }}</span>
@@ -8,4 +8,8 @@
   </li>
 </ul>
 
-<button type="button" routerLink="/categories/create">Nova Categoria</button>
+<ng-template #empty_list>
+  <h3>{{ message }}</h3>
+</ng-template>
+
+<button type="button" routerLink="/categories/create">New Category</button>

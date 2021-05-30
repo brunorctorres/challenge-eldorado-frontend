@@ -8,20 +8,22 @@ import { CategoryService } from './category.service';
   styleUrls: ['./category.component.scss'],
 })
 export class CategoryComponent implements OnInit {
-  title = 'Categorias';
+  title = 'Categories';
 
   categories: Category[] = [];
+  message: string = 'Loading categories...';
 
   constructor(public categoryService: CategoryService) {}
 
   ngOnInit(): void {
-    this.categoryService
-      .getAll()
-      .subscribe((data) => (this.categories = data.categories));
+    this.categoryService.getAll().subscribe((data) => {
+      this.categories = data.categories;
+      if (!this.categories.length) this.message = 'No categories yet...';
+    });
   }
 
   deleteCategory(category: Category) {
-    if (confirm('ATENÇÃO: Confirmar exclusão da categoria?')) {
+    if (confirm('ATTENTION: Confirm category exclusion?')) {
       this.categoryService.delete(category).subscribe(
         (data) => {
           if (data.removed) window.location.reload();
