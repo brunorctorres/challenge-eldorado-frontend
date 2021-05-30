@@ -17,15 +17,15 @@ export class DeviceService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getAll(): Observable<{ ok: boolean; devices: Device[] }> {
+  getAll(): Observable<{ devices: Device[] }> {
     return this.httpClient
-      .get<{ ok: boolean; devices: Device[] }>(this.api + '/devices/')
+      .get<{ devices: Device[] }>(this.api + '/devices/')
       .pipe(catchError(this.errorHandler));
   }
 
-  create(device: Device): Observable<Device> {
+  create(device: Device): Observable<{ created: boolean }> {
     return this.httpClient
-      .post<Device>(
+      .post<{ created: boolean }>(
         this.api + '/devices/',
         JSON.stringify(device),
         this.httpOptions
@@ -33,15 +33,12 @@ export class DeviceService {
       .pipe(catchError(this.errorHandler));
   }
 
-  getById(device: Device): Observable<Device> {
+  delete(device: Device): Observable<{ removed: boolean }> {
     return this.httpClient
-      .get<Device>(this.api + '/devices/' + device.Id)
-      .pipe(catchError(this.errorHandler));
-  }
-
-  delete(device: Device) {
-    return this.httpClient
-      .delete<Device>(this.api + '/devices/' + device.Id, this.httpOptions)
+      .delete<{ removed: boolean }>(
+        this.api + '/devices/' + device.Id,
+        this.httpOptions
+      )
       .pipe(catchError(this.errorHandler));
   }
 

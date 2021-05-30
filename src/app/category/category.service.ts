@@ -18,15 +18,15 @@ export class CategoryService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getAll(): Observable<{ ok: boolean; categories: Category[] }> {
+  getAll(): Observable<{ categories: Category[] }> {
     return this.httpClient
-      .get<{ ok: boolean; categories: Category[] }>(this.api + '/categories/')
+      .get<{ categories: Category[] }>(this.api + '/categories/')
       .pipe(catchError(this.errorHandler));
   }
 
-  create(category: Category): Observable<Category> {
+  create(category: Category): Observable<{ created: boolean }> {
     return this.httpClient
-      .post<Category>(
+      .post<{ created: boolean }>(
         this.api + '/categories/',
         JSON.stringify(category),
         this.httpOptions
@@ -34,16 +34,10 @@ export class CategoryService {
       .pipe(catchError(this.errorHandler));
   }
 
-  getById(category: Category): Observable<Category> {
+  delete(category: Category): Observable<{ removed: boolean }> {
     return this.httpClient
-      .get<Category>(this.api + '/categories/' + category.Id)
-      .pipe(catchError(this.errorHandler));
-  }
-
-  delete(category: Category) {
-    return this.httpClient
-      .delete<Category>(
-        this.api + '/categories/' + category.Id,
+      .delete<{ removed: boolean }>(
+        `${this.api}/categories/${category.Id}`,
         this.httpOptions
       )
       .pipe(catchError(this.errorHandler));

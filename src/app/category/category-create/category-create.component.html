@@ -1,6 +1,18 @@
 <h2>Adicionar categoria</h2>
 
-<form method="POST" onsubmit="console.log('salvar categoria...')">
-  <input placeholder="Name" required />
+<form method="POST" [formGroup]="categoryForm" (ngSubmit)="submit()">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input
+      id="name"
+      type="text"
+      formControlName="Name"
+      class="form-control"
+      maxlength="128"
+    />
+    <!-- <control-messages
+      [control]="categoryCreationForm.get('Name')"
+    ></control-messages> -->
+  </div>
   <button type="submit">Salvar</button>
 </form>
