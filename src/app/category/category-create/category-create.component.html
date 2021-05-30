@@ -14,8 +14,12 @@
       *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)"
       class="alert alert-danger"
     >
-      <div *ngIf="Name?.errors?.required">Name is required.</div>
-      <div *ngIf="Name?.errors?.maxLength">128 characters maximum.</div>
+      <div *ngIf="categoryForm.controls['Name'].hasError('required')">
+        Name is required.
+      </div>
+      <div *ngIf="categoryForm.controls['Name'].hasError('maxlength')">
+        128 characters maximum.
+      </div>
     </div>
   </div>
   <button type="submit" [disabled]="categoryForm.invalid">Save Category</button>
