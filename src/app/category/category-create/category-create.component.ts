@@ -17,7 +17,10 @@ export class CategoryCreateComponent implements OnInit {
     private router: Router
   ) {
     this.categoryForm = formBuilder.group({
-      Name: formBuilder.control('', Validators.required),
+      Name: formBuilder.control('', [
+        Validators.required,
+        Validators.maxLength(128),
+      ]),
     });
   }
 
@@ -30,5 +33,9 @@ export class CategoryCreateComponent implements OnInit {
         if (data.created) this.router.navigate(['/categories']);
       });
     }
+  }
+
+  get Name() {
+    return this.categoryForm.get('Name');
   }
 }

@@ -1,4 +1,4 @@
-<h2>Adicionar categoria</h2>
+<h2>Add Category</h2>
 
 <form method="POST" [formGroup]="categoryForm" (ngSubmit)="submit()">
   <div class="form-group">
@@ -8,11 +8,15 @@
       type="text"
       formControlName="Name"
       class="form-control"
-      maxlength="128"
+      appFocus
     />
-    <!-- <control-messages
-      [control]="categoryCreationForm.get('Name')"
-    ></control-messages> -->
+    <div
+      *ngIf="Name?.invalid && (Name?.dirty || Name?.touched)"
+      class="alert alert-danger"
+    >
+      <div *ngIf="Name?.errors?.required">Name is required.</div>
+      <div *ngIf="Name?.errors?.maxLength">128 characters maximum.</div>
+    </div>
   </div>
-  <button type="submit">Salvar</button>
+  <button type="submit" [disabled]="categoryForm.invalid">Save Category</button>
 </form>

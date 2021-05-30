@@ -1,23 +1,115 @@
-h1 {
-  color: #369;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 250%;
-}
-h2,
-h3 {
-  color: #444;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: lighter;
-}
-body {
-  margin: 1em;
-}
+// Global
 body,
 input[type="text"],
 button {
-  color: #333;
   font-family: Cambria, Georgia, serif;
 }
+
 * {
   font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+  height: 30px;
+  &:disabled {
+    opacity: 0.7;
+  }
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+h1,
+h2 {
+  color: #ff9e01;
+}
+
+h3 {
+  color: #ccc;
+}
+
+// Form
+form {
+  .form-group {
+    margin: 20px 0;
+    label {
+      font-weight: 700;
+      font-size: 14px;
+      display: block;
+      margin-bottom: 5px;
+    }
+    input,
+    select {
+      padding: 5px;
+      box-sizing: border-box;
+      width: 100%;
+      height: 30px;
+    }
+    select {
+      cursor: pointer;
+      option {
+        height: 30px;
+        padding: 20px;
+      }
+    }
+  }
+  .alert {
+    margin: 5px 0;
+    font-size: 12px;
+    &.alert-danger {
+      color: #e20404;
+    }
+  }
+}
+
+// Card
+.card {
+  list-style-type: none;
+  padding: 0;
+  overflow: auto;
+  li {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #eee;
+    margin: 0.5em 0;
+    padding: 10px 15px 10px 60px;
+    box-sizing: border-box;
+    min-height: 30px;
+    min-width: 280px;
+    width: 100%;
+    border-radius: 4px;
+  }
+  .badge {
+    position: absolute;
+    left: 0;
+    font-size: small;
+    color: #fff;
+    background: #ff9e01;
+    height: 100%;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px 0 0 4px;
+  }
+  .remove {
+    top: 8px;
+    right: 8px;
+    color: #e20404;
+    cursor: pointer;
+  }
+  .fields {
+    .field {
+      &:not(:last-of-type) {
+        margin-bottom: 5px;
+      }
+      .title {
+        display: inline-block;
+        font-weight: 700;
+        margin-right: 5px;
+      }
+    }
+  }
 }

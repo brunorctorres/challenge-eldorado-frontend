@@ -21,9 +21,17 @@ export class DeviceCreateComponent implements OnInit {
     private router: Router
   ) {
     this.deviceForm = formBuilder.group({
-      Color: formBuilder.control('', Validators.required),
       Category: formBuilder.control('', Validators.required),
-      partNumber: formBuilder.control('', Validators.required),
+      Color: formBuilder.control('', [
+        Validators.required,
+        Validators.pattern('[a-zA-Z ]*'),
+        Validators.maxLength(16),
+      ]),
+      partNumber: formBuilder.control('', [
+        Validators.required,
+        Validators.pattern(/^[0-9]\d*$/),
+        Validators.min(1),
+      ]),
     });
   }
 
@@ -41,5 +49,17 @@ export class DeviceCreateComponent implements OnInit {
         if (data.created) this.router.navigate(['/devices']);
       });
     }
+  }
+
+  get Category() {
+    return this.deviceForm.get('Category');
+  }
+
+  get Color() {
+    return this.deviceForm.get('Color');
+  }
+
+  get partNumber() {
+    return this.deviceForm.get('partNumber');
   }
 }
