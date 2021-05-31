@@ -42,7 +42,6 @@ export class DeviceCreateComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.deviceForm.value);
     if (this.deviceForm.dirty && this.deviceForm.valid) {
       const device = this.deviceForm.value;
       this.deviceService.create(device).subscribe((data) => {
