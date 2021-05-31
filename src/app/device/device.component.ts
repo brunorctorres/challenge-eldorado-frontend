@@ -24,9 +24,14 @@ export class DeviceComponent implements OnInit {
 
   deleteDevice(device: Device) {
     if (confirm('ATTENTION: Confirm device exclusion?')) {
-      this.deviceService.delete(device).subscribe((data) => {
-        if (data.removed) window.location.reload();
-      });
+      this.deviceService.delete(device).subscribe(
+        (data) => {
+          if (data.removed) window.location.reload();
+        },
+        (err) => {
+          alert('Device delete attempt failed.');
+        }
+      );
     }
   }
 }
