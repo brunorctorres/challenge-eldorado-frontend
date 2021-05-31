@@ -29,7 +29,9 @@ export class CategoryComponent implements OnInit {
           if (data.removed) window.location.reload();
         },
         (err) => {
-          alert('Falha na tentativa de exclusão.');
+          alert(
+            'Category delete attempt failed. Some device has this category.'
+          );
         }
       );
     }
